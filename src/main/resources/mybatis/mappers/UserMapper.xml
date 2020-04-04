@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bangb.mapper.UserMapper">
+	
+	<select id="queryUserForList" resultType="com.bangb.user.bean.UserBean" parameterType="com.bangb.user.bean.UserBean">
+		select
+			id
+			,user_name
+			,password
+			,age
+			,birthday
+			,sex
+			,salary 
+		 from
+		 	 my_user
+		 where	1=1
+		 <if test="id != null and id != '' ">
+		 and
+		 	id = #{id}
+		 </if>	
+		 <if test="userName != null and userName != '' ">
+		 and
+		 	user_name = #{userName}
+		 </if>	
+		 	
+	</select>
+	
+	<insert id="addUsers" parameterType="java.util.Map">
+		insert into
+				my_user
+			(	
+				id
+				,user_name
+				,password
+				,age
+				,birthday
+				,sex
+			)
+		values
+		<foreach collection="userList" item="user" index="index" separator=",">
+				(
+				#{user.id}
+				,#{user.userName}
+				,#{user.password}
+				,#{user.age}
+				,#{user.birthday}
+				,#{user.sex}
+				)
+		</foreach>
+	</insert>
+	
+</mapper>

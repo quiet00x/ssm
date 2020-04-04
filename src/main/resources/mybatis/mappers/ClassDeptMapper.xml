@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bangb.mapper.ClassDeptMapper">
+	
+	<resultMap type="com.bangb.user.bean.ClassDept" id="classRM" autoMapping="true">
+ 		<id column="class_Id" property="classId"/>
+ 		<association property="teacher" javaType="com.bangb.user.bean.Teacher">
+ 			<id column="tch_id" property="tchId"/>
+			<result  column="tch_nme" property="tchNme"/>
+ 			<collection property="scList" ofType="com.bangb.user.bean.Source">
+	 			<id  column="type" property="type"/>
+				<result  column="source" property="source"/>
+ 			</collection>
+ 		</association>
+ 		<association property="student" javaType="com.bangb.user.bean.Student">
+ 			<id column="std_id" property="stdId"/>
+			<result  column="std_nme" property="stdNme"/>
+ 			<collection property="scList" ofType="com.bangb.user.bean.SourceCld">
+				<id  column="type2" property="type"/>
+				<result  column="source2" property="source"/>
+ 			</collection>
+ 		</association>
+ 	</resultMap>
+	
+	<!-- 利用union all 将一条数据变成多条数据 -->
+	<select id="queryClassList" resultMap="classRM">
+		SELECT
+			class_id
+			,tch_id
+			,tch_nme
+			,std_id
+			,std_nme
+			,'java'   AS type
+			,java_cnt AS source
+			,'flex'   AS type2
+			,flex_cnt AS source2
+		FROM `class_dept`
+		UNION ALL
+		SELECT
+			class_id
+			,tch_id
+			,tch_nme
+			,std_id
+			,std_nme
+			,'python' 	AS type
+			,python_cnt    AS source
+			,'js'   AS type2
+			,js_cnt AS source2
+		FROM `class_dept`
+	</select>
+	
+	<insert id="addUsers" parameterType="java.util.Map">
+		insert into
+				my_user
+			(	
+				id
+				,user_name
+				,password
+				,age
+				,birthday
+				,sex
+			)
+		values
+		<foreach collection="userList" item="user" index="index" separator=",">
+				(
+				#{user.id}
+				,#{user.userName}
+				,#{user.password}
+				,#{user.age}
+				,#{user.birthday}
+				,#{user.sex}
+				)
+		</foreach>
+	</insert>
+	
+</mapper>

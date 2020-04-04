@@ -1,0 +1,65 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/util 
+	http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+	
+	<!-- Spring容器 包扫描范围 -->
+ 	<context:component-scan base-package="com.bangb" />
+	
+	<!-- spring容器的注解开关 -->
+ 	<context:annotation-config />
+ 	
+ 	<!-- aop注解开关 默认使用JDK动态代理 proxy-target-class="true" 强制使用cglib动态代理 -->
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+ 	
+ 	<!-- 可通过注解控制事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+ 	
+ 	<!--导入外部配置文件  -->
+	<context:property-placeholder location="classpath:/jdbc.properties"/>
+	
+	<!-- 配置sql会话工厂 -->
+	<bean class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
+	<!-- 配置数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 引入Mybatis的核心配置文件 -->
+		<property name="configLocation" 
+		value="classpath:/mybatis/mybatis-config.xml" />
+		<!-- 引入所有的mapper映射文件 -->
+		<property name="mapperLocations" 
+		value="classpath:/mybatis/mappers/*.xml" />
+	</bean>
+	
+	<!-- 配置mapper接口扫描器 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.bangb.mapper" />
+	</bean>
+	
+	<!-- 数据源 -->
+	 <bean id="dataSource" 
+	class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	
+	<property name="driverClass" value="${jdbcDriver}"></property>
+	<property name="jdbcUrl" value="${jdbcUrl}"></property>
+	<property name="user" value="${jdbcUser}"></property>
+	<property name="password" value="${jdbcPassword}"></property>
+	<property name="maxPoolSize" value="20"></property>
+	<property name="minPoolSize" value="3"></property>
+	</bean>
+	
+	
+	<bean id="factory" class="com.bangb.service.BeanFactoryInstance"/ >
+	
+</beans>
