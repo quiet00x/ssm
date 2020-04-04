@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Transaction>
+	<ESBHead>
+		<RequesterId></RequesterId>
+		<ResponderId></ResponderId>
+		<ESBServiceId></ESBServiceId>
+		<MessageType></MessageType>
+		<ESBReqTimestamp></ESBReqTimestamp>
+		<ESBRspTimestamp></ESBRspTimestamp>
+		<Version></Version>
+		<Reserved></Reserved>
+	</ESBHead> 
+	<ESBBody>
+		<AppRequest>
+			<AppReqHead>
+				<TradeCode></TradeCode>
+				<ReqSerialNo></ReqSerialNo>
+				<TradeDate></TradeDate>
+				<TradeTime></TradeTime>
+				<TradeSource>
+					<EnterpriseId></EnterpriseId>
+					<TradeChannel></TradeChannel>
+					<SubBankNo></SubBankNo>
+					<OrganNo></OrganNo>
+					<TellerNo></TellerNo>
+					<TermNo></TermNo>
+					<ForeTradeCode></ForeTradeCode>
+					<TradeNote></TradeNote>
+				</TradeSource>
+				<AuthInfo>
+					<AuthLevel></AuthLevel>
+					<Supervisor1></Supervisor1>
+					<Supervisor2></Supervisor2>
+					<Supv1Password></Supv1Password>
+					<Supv2Password></Supv2Password>
+					<AuthReason></AuthReason>
+				</AuthInfo>
+				<Reserved></Reserved>
+			</AppReqHead>
+			<AppReqBody>
+				<CommonReq>
+					<RequestLevel></RequestLevel>
+					<TotalSize></TotalSize>
+					<EventId></EventId>
+					<EventType></EventType>
+				</CommonReq>
+				<ResourceObj>
+					<RequestType></RequestType>
+					<DocumentId></DocumentId>
+					<ResourceObjName></ResourceObjName>
+					<DownloadPath></DownloadPath>
+				</ResourceObj>
+			</AppReqBody>
+		</AppRequest>
+	</ESBBody>
+</Transaction>
+  	
