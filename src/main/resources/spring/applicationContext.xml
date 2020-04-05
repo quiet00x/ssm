@@ -60,6 +60,15 @@
 	</bean>
 	
 	
-	<bean id="factory" class="com.bangb.service.BeanFactoryInstance"/ >
+	<bean id="factory" class="com.bangb.service.BeanFactoryInstance" />
+	
+	<!-- 利用 PropertiesFactoryBean  构建  Properties 对象 构建数据字典 -->
+	<bean id="prop" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+	 	<property name="locations">
+	 		<array>
+	 			<value>classpath:dictionary.properties</value>
+	 		</array>
+	 	</property>
+	</bean>
 	
 </beans>
