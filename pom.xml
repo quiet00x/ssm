@@ -311,7 +311,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>5.1.3.Final</version>
+			<version>5.3.5.Final</version>
 		</dependency>
 		<!-- validation bean 是基于JSR-303标准开发出来的，使用注解方式实现参数校验的框架 -->
 		<dependency>
