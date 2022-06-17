@@ -304,7 +304,7 @@
 		<dependency>
 		    <groupId>com.alibaba</groupId>
 		    <artifactId>fastjson</artifactId>
-		    <version>1.2.6</version>
+		    <version>1.2.83</version>
 		</dependency>
 		
 		<!-- hibernate validator 参数校验框架 -->
